@@ -1,73 +1,73 @@
 # Response
-> The Current content is an **example template**; please edit it to fit your style and content.
+
 ## A. Required Information
 ### A.1. Requirement Completion Rate
 - [x] List all pharmacies open at a specific time and on a day of the week if requested.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getPharmacies` API.
 - [x] List all masks sold by a given pharmacy, sorted by mask name or price.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getPharmacyMasks` API.
 - [x] List all pharmacies with more or less than x mask products within a price range.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getPharmaciesByMaskPriceAndAmount` API.
 - [x] The top x users by total transaction amount of masks within a date range.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getUsersByDateRange` API.
 - [x] The total number of masks and dollar value of transactions within a date range.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getMaskTransactionsData` API.
 - [x] Search for pharmacies or masks by name, ranked by relevance to the search term.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getPharmaciesOrMasks` API.
 - [x] Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction.
-  - Implemented at xxx API.
+  - Implemented at `GET /api/getUser`, `POST /api/addUser`, `POST /api/updateUserCashBalance`, `POST /api/userPurchaseMasks` API.
+
 ### A.2. API Document
-> Please describe how to use the API in the API documentation. You can edit by any format (e.g., Markdown or OpenAPI) or free tools (e.g., [hackMD](https://hackmd.io/), [postman](https://www.postman.com/), [google docs](https://docs.google.com/document/u/0/), or  [swagger](https://swagger.io/specification/)).
+This documentation uses **Swagger UI** to display and interact with the API. Swagger UI provides an intuitive interface that allows you to explore the API, view detailed information about each endpoint, and execute requests.
 
-Import [this](#api-document) json file to Postman.
+- **Swagger UI** is an open-source front-end tool that automatically generates API documentation and allows users to test the API directly from the web interface.
+- You can send requests and view responses right from the interface, making it easier to understand the API’s functionality.
 
-### A.3. Import Data Commands
+Click the link below to access the Swagger UI interface:
+Swagger UI Interface (http://localhost:YOUR_PORT/api/document)
+
+### A.3. Install Laravel
+1. **Clone the repository:**
+```
+git clone https://github.com/qq345342/phantom_mask.git
+```
+2. **Install Composer and NPM dependencies:**
+```
+cd phantom_mask
+composer install 
+npm install
+```
+3. **Set up your environment variables:**
+copy .env.example to .env, and edit database settings.
+4. **Generate the application key:**
+```
+php artisan key:generate
+```
+5. **Run migrations:**
+```
+php artisan migrate
+```
+6. **Serve the application:**
+```
+php artisan serve
+```
+### A.4. Import Data Commands
 Please run these two script commands to migrate the data into the database.
 
-```bash
-$ rake import_data:pharmacies[PATH_TO_FILE]
-$ rake import_data:users[PATH_TO_FILE]
+```
+php artisan app:import-pharmacies-data-command
+php artisan app:import-users-data-command
 ```
 ## B. Bonus Information
-
->  If you completed the bonus requirements, please fill in your task below.
-### B.1. Test Coverage Report
-
-I wrote down the 20 unit tests for the APIs I built. Please check the test coverage report at [here](#test-coverage-report).
-
-You can run the test script by using the command below:
-
-```bash
-bundle exec rspec spec
-```
-
-### B.2. Dockerized
-Please check my Dockerfile / docker-compose.yml at [here](#dockerized).
-
-On the local machine, please follow the commands below to build it.
-
-```bash
-$ docker build --build-arg ENV=development -p 80:3000 -t my-project:1.0.0 .  
-$ docker-compose up -d
-
-# go inside the container, run the migrate data command.
-$ docker exec -it my-project bash
-$ rake import_data:pharmacies[PATH_TO_FILE] 
-$ rake import_data:user[PATH_TO_FILE]
-```
-
-### B.3. Demo Site Url
-
-The demo site is ready on [my AWS demo site](#demo-site-url); you can try any APIs on this demo site.
 
 ## C. Other Information
 
 ### C.1. ERD
 
-My ERD [erd-link](#erd-link).
+My ERD [erd-link](https://dbdiagram.io/d/67ed0fd64f7afba184122292).
 
 ### C.2. Technical Document
 
-For frontend programmer reading, please check this [technical document](technical-document) to know how to operate those APIs.
+For frontend programmer reading, please check Swagger UI Interface (http://localhost:YOUR_PORT/api/document) to know how to operate those APIs.
 
 - --

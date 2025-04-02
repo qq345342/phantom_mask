@@ -1,0 +1,567 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Phantom Platform",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/getPharmacies": {
+            "get": {
+                "tags": [
+                    "B1."
+                ],
+                "summary": "get the pharmacies data",
+                "operationId": "c4a72b3d44789f81b3973aeda3732a24",
+                "parameters": [
+                    {
+                        "parameter": "time",
+                        "name": "time",
+                        "in": "query",
+                        "description": "input time.(14:30)",
+                        "schema": {
+                            "properties": {
+                                "time": {
+                                    "type": "string",
+                                    "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                                    "example": "14:30"
+                                }
+                            },
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "week",
+                        "name": "week",
+                        "in": "query",
+                        "description": "select day of the week.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "Mon",
+                                "Tue",
+                                "Wed",
+                                "Thu",
+                                "Fri",
+                                "Sat",
+                                "Sun"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": "",
+                                        "data": [
+                                            {
+                                                "name": "DFW Wellness",
+                                                "cash_balance": 328.41
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getPharmacyMasks": {
+            "get": {
+                "tags": [
+                    "B2."
+                ],
+                "summary": "get pharmacy masks by pharmacy name.",
+                "operationId": "6b567a656d16046a99484c382ad5cd06",
+                "parameters": [
+                    {
+                        "parameter": "pharmacyName",
+                        "name": "pharmacyName",
+                        "in": "query",
+                        "description": "input pharmacy name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "sort",
+                        "name": "sort",
+                        "in": "query",
+                        "description": "select sort.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "mask_name",
+                                "mask_price"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": "",
+                                        "data": [
+                                            {
+                                                "mask_name": "True Barrier (green) (3 per pack)",
+                                                "mask_price": 13.7
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getPharmaciesByMaskPriceAndAmount": {
+            "get": {
+                "tags": [
+                    "B3."
+                ],
+                "summary": "get pharmacies by mask price and amount.",
+                "operationId": "d415bd7d7e2943eafe1d1d812bc7feb0",
+                "parameters": [
+                    {
+                        "parameter": "priceFrom",
+                        "name": "priceFrom",
+                        "in": "query",
+                        "description": "input price range.",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "parameter": "priceTo",
+                        "name": "priceTo",
+                        "in": "query",
+                        "description": "input price range.",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "parameter": "amount",
+                        "name": "amount",
+                        "in": "query",
+                        "description": "input amount.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": "",
+                                        "data": [
+                                            {
+                                                "name": "DFW Wellness",
+                                                "mask_amount": 5
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getUsersByDateRange": {
+            "get": {
+                "tags": [
+                    "B4."
+                ],
+                "summary": "get users by date range.",
+                "operationId": "bc76e771ad62aa6e47387b6753eab16c",
+                "parameters": [
+                    {
+                        "parameter": "startDate",
+                        "name": "startDate",
+                        "in": "query",
+                        "description": "input start date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "parameter": "endDate",
+                        "name": "endDate",
+                        "in": "query",
+                        "description": "input end date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "parameter": "top",
+                        "name": "top",
+                        "in": "query",
+                        "description": "input top.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": "",
+                                        "data": [
+                                            {
+                                                "name": "user-name",
+                                                "transaction_amount": 12.35
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getMaskTransactionsData": {
+            "get": {
+                "tags": [
+                    "B5."
+                ],
+                "summary": "get mask transactions data.",
+                "operationId": "f85052ae5c99e6946c8242bf8afbecd4",
+                "parameters": [
+                    {
+                        "parameter": "startDate",
+                        "name": "startDate",
+                        "in": "query",
+                        "description": "input start date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "parameter": "endDate",
+                        "name": "endDate",
+                        "in": "query",
+                        "description": "input end date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": "",
+                                        "data": [
+                                            {
+                                                "mask_name": "mask-name",
+                                                "dollar": 333,
+                                                "amount": 5
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getPharmaciesOrMasks": {
+            "get": {
+                "tags": [
+                    "B6."
+                ],
+                "summary": "get pharmacies or masks by keyword.",
+                "operationId": "c467737dfcac88a48549303309762f19",
+                "parameters": [
+                    {
+                        "parameter": "keyword",
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "input keyword name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": "",
+                                        "data": [
+                                            {
+                                                "name": "pharmacy-name",
+                                                "mask_name": "mask-name"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getUser": {
+            "get": {
+                "tags": [
+                    "B7."
+                ],
+                "summary": "get user name and cash balance.",
+                "operationId": "2a133c5254729ff3a51d8c284f65efe0",
+                "parameters": [
+                    {
+                        "parameter": "userName",
+                        "name": "userName",
+                        "in": "query",
+                        "description": "input user name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "code": 200,
+                                        "message": "",
+                                        "data": {
+                                            "name": "user-name",
+                                            "cash_balance": 333
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/addUser": {
+            "post": {
+                "tags": [
+                    "B7."
+                ],
+                "summary": "add user with name and cash balace.",
+                "operationId": "6491045ca8befa59470a3d4e5bd9e190",
+                "parameters": [
+                    {
+                        "parameter": "userName",
+                        "name": "userName",
+                        "in": "query",
+                        "description": "input user name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "cashBalance",
+                        "name": "cashBalance",
+                        "in": "query",
+                        "description": "input init cashBalance.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "code": 200,
+                                        "message": ""
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/updateUserCashBalance": {
+            "post": {
+                "tags": [
+                    "B7."
+                ],
+                "summary": "update user's cash balance.",
+                "operationId": "9ebe7f824e254176734efc32f31eb871",
+                "parameters": [
+                    {
+                        "parameter": "userName",
+                        "name": "userName",
+                        "in": "query",
+                        "description": "input user name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "cashBalance",
+                        "name": "cashBalance",
+                        "in": "query",
+                        "description": "input cashBalance.",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": ""
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/userPurchaseMasks": {
+            "post": {
+                "tags": [
+                    "B7."
+                ],
+                "summary": "user purchase masks.",
+                "operationId": "6ba6a9e4eac66fd2dc14ec62ed532127",
+                "parameters": [
+                    {
+                        "parameter": "userName",
+                        "name": "userName",
+                        "in": "query",
+                        "description": "input user name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "pharmacyName",
+                        "name": "pharmacyName",
+                        "in": "query",
+                        "description": "input pharmacy name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "maskName",
+                        "name": "maskName",
+                        "in": "query",
+                        "description": "input mask name.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "transactionAmount",
+                        "name": "transactionAmount",
+                        "in": "query",
+                        "description": "input transaction amount.",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "parameter": "transactionDate",
+                        "name": "transactionDate",
+                        "in": "query",
+                        "description": "input transaction date.",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "message": ""
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "B1.",
+            "description": "List all pharmacies open at a specific time and on a day of the week if requested."
+        },
+        {
+            "name": "B2.",
+            "description": "List all masks sold by a given pharmacy, sorted by mask name or price."
+        },
+        {
+            "name": "B3.",
+            "description": "List all pharmacies with more or less than x mask products within a price range."
+        },
+        {
+            "name": "B4.",
+            "description": "The top x users by total transaction amount of masks within a date range."
+        },
+        {
+            "name": "B5.",
+            "description": "The total amount of masks and dollar value of transactions within a date range."
+        },
+        {
+            "name": "B6.",
+            "description": "Search for pharmacies or masks by name, ranked by relevance to the search term."
+        },
+        {
+            "name": "B7.",
+            "description": "Process a user purchases a mask from a pharmacy, and handle all relevant data changes in an atomic transaction."
+        }
+    ]
+}
